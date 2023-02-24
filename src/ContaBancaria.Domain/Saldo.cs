@@ -1,20 +1,25 @@
+using System.Globalization;
+
 namespace ContaBancaria.Domain;
 
 public class Saldo
 {
-    public Moeda Inicial { get; private set; }
-    public Moeda Atual { get; private set; }
+    public decimal Valor { get; private set; }
 
-    public Saldo(Moeda inicial, Moeda atual)
+    public Saldo(decimal valor)
     {
-        Inicial = inicial;
-        Atual = atual;
+        Valor = valor;
     }
 
-    public void Recalcular(IEnumerable<Movimentacao> movimentacoes)
+    public void AtribuirValor(decimal valor)
     {
-        var resultado = Inicial.Valor + movimentacoes.Sum(m => m.Moeda.Valor);
+        Valor = valor;
+    }
 
-        Atual.AtribuirValor(resultado);
+    public override string ToString()
+    {
+        var specifier = "C";
+        var culture = CultureInfo.CreateSpecificCulture("pt-BR");
+        return Valor.ToString(specifier, culture);
     }
 }
