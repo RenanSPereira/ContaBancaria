@@ -16,7 +16,7 @@ public class Moeda
         Valor = valor;
     }
 
-    public string ObterValorFormatado()
+    public override string ToString()
     {
         var specifier = "C";
         var culture = CultureInfo.CreateSpecificCulture("pt-BR");
