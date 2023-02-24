@@ -15,7 +15,7 @@ public class MovimentacoesContaTest
 
         conta?.RecalcularSaldo();
 
-        Assert.Equal("R$ 5,00", conta?.Saldo.Atual.ObterValorFormatado());
+        Assert.Equal("R$ 5,00", conta?.Saldo.Atual.ToString());
     }
 
     [Fact]
@@ -33,7 +33,7 @@ public class MovimentacoesContaTest
 
         conta?.RecalcularSaldo();
 
-        Assert.Equal("R$ 3,50", conta?.Saldo.Atual.ObterValorFormatado());
+        Assert.Equal("R$ 3,50", conta?.Saldo.Atual.ToString());
     }
 
     [Fact]
@@ -51,6 +51,6 @@ public class MovimentacoesContaTest
 
         conta?.RecalcularSaldo();
 
-        Assert.Equal("R$ 2.003,50", conta?.Saldo.Atual.ObterValorFormatado());
+        Assert.Equal("R$ 2.003,50", conta?.Saldo.Atual.ToString());
     }
 }
