@@ -29,8 +29,8 @@ public class Extrato
             .Where(m => m.DataCadastro.Date == DateTime.Now.Date)
             .ToList();
 
-        var resultado = SaldoInicial.Valor + movimentacoesDiaAtual.Sum(m => m.Valor);
+        var saldoAtualRecalculado = SaldoInicial.Valor + movimentacoesDiaAtual.Sum(m => m.Valor);
 
-        SaldoAtual.AtribuirValor(resultado);
+        SaldoAtual = new Saldo(saldoAtualRecalculado);
     }
 }
