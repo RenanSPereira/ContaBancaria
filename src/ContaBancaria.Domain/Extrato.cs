@@ -31,8 +31,8 @@ public class Extrato
 
         if (movimentacoesDiaAtual.Count() == 0) return;
 
-        var saldoAtualRecalculado = SaldoInicial.Valor + movimentacoesDiaAtual.Sum(m => m.Valor);
+        var saldoAtualRecalculado = SaldoInicial.Moeda.Valor + movimentacoesDiaAtual.Sum(m => m.Moeda.Valor);
 
-        SaldoAtual = new Saldo(saldoAtualRecalculado);
+        SaldoAtual = new Saldo(new Moeda(saldoAtualRecalculado));
     }
 }

@@ -4,17 +4,10 @@ namespace ContaBancaria.Domain;
 
 public class Saldo
 {
-    public decimal Valor { get; private set; }
+    public Moeda Moeda { get; private set; }
 
-    public Saldo(decimal valor)
+    public Saldo(Moeda moeda)
     {
-        Valor = valor;
-    }
-
-    public override string ToString()
-    {
-        var specifier = "C";
-        var culture = CultureInfo.CreateSpecificCulture("pt-BR");
-        return Valor.ToString(specifier, culture);
+        Moeda = moeda;
     }
 }
