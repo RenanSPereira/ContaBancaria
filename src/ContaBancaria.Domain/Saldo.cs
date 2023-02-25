@@ -11,11 +11,6 @@ public class Saldo
         Valor = valor;
     }
 
-    public void AtribuirValor(decimal valor)
-    {
-        Valor = valor;
-    }
-
     public override string ToString()
     {
         var specifier = "C";
