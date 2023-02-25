@@ -29,7 +29,7 @@ public class Extrato
             .Where(m => m.DataCadastro.Date == DateTime.Now.Date)
             .ToList();
 
-        var resultado = SaldoInicial.Valor + movimentacoesDiaAtual.Sum(m => m.Moeda.Valor);
+        var resultado = SaldoInicial.Valor + movimentacoesDiaAtual.Sum(m => m.Valor);
 
         SaldoAtual.AtribuirValor(resultado);
     }
