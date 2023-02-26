@@ -30,7 +30,7 @@ public class Extrato
             .Where(m => m.DataCadastro.Date == DateTime.Now.Date)
             .ToList();
 
-        if (movimentacoesDiaAtual.Count() == 0) return;
+        if (!movimentacoesDiaAtual.Any()) return;
 
         var saldoAtualRecalculado = SaldoInicial.Moeda.Valor + movimentacoesDiaAtual.Sum(m => m.Moeda.Valor);
 
