@@ -4,6 +4,7 @@ public class Extrato
 {
     public Saldo SaldoInicial { get; private set; }
     public Saldo SaldoAtual { get; private set; }
+    
     private List<Movimentacao> _movimentacoes;
     public IReadOnlyCollection<Movimentacao> Movimentacoes => _movimentacoes;
 

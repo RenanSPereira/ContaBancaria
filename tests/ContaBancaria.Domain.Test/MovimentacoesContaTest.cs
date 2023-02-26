@@ -1,3 +1,5 @@
+using Xunit;
+
 namespace ContaBancaria.Domain.Test;
 
 public class MovimentacoesContaTest
