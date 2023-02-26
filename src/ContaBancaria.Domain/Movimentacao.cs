@@ -10,6 +10,6 @@ public class Movimentacao
     {
         TipoMovimentacao = tipoMovimentacao;
         DataCadastro = DateTime.Now;
-        Moeda = tipoMovimentacao == TipoMovimentacao.Debito ? moeda.Negativar() : moeda;
+        Moeda = tipoMovimentacao == TipoMovimentacao.Debito || tipoMovimentacao == TipoMovimentacao.Transferencia ? moeda.Negativar() : moeda;
     }
 }
