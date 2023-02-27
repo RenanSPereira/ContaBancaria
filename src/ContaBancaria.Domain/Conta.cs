@@ -4,6 +4,8 @@ public class Conta
 {
     public int Numero { get; private set; }
     public TipoConta TipoConta { get; private set; }
+
+    public Saldo Saldo { get; private set; }
     public Extrato Extrato { get; private set; }
 
     public Conta(TipoConta tipoConta, int numero, Extrato extrato)
@@ -12,4 +14,6 @@ public class Conta
         TipoConta = tipoConta;
         Extrato = extrato;
     }
+
+    public void AtuatizarSaldo(Saldo saldo) => Saldo = saldo;
 }

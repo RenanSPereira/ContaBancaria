@@ -26,15 +26,15 @@ public class Cliente
         return _contas.FirstOrDefault(c => c.TipoConta == tipoConta);
     }
 
-    public void Transferencia(Moeda moeda, TipoConta tipoContaOrigem, TipoConta tipoContaDestino)
-    {
-        var contaOrigem = ObterConta(tipoContaOrigem);
-        var contaDestino = ObterConta(tipoContaDestino);
-
-        contaOrigem?.Extrato.AdicionarMovimentacao(new Movimentacao(moeda, TipoMovimentacao.Transferencia));
-        contaDestino?.Extrato.AdicionarMovimentacao(new Movimentacao(moeda, TipoMovimentacao.Credito));
-
-        contaOrigem?.Extrato.RecalcularSaldo();
-        contaDestino?.Extrato.RecalcularSaldo();
-    }
+    // public void Transferencia(Moeda moeda, TipoConta tipoContaOrigem, TipoConta tipoContaDestino)
+    // {
+    //     var contaOrigem = ObterConta(tipoContaOrigem);
+    //     var contaDestino = ObterConta(tipoContaDestino);
+    //
+    //     contaOrigem?.Extrato.AdicionarMovimentacao(new Movimentacao(moeda, TipoMovimentacao.Transferencia));
+    //     contaDestino?.Extrato.AdicionarMovimentacao(new Movimentacao(moeda, TipoMovimentacao.Credito));
+    //
+    //     contaOrigem?.Extrato.RecalcularSaldo();
+    //     contaDestino?.Extrato.RecalcularSaldo();
+    // }
 }

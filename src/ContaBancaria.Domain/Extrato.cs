@@ -1,39 +1,61 @@
 namespace ContaBancaria.Domain;
 
-public class Extrato
+public class Extrato : Entity
 {
-    public Saldo SaldoInicial { get; private set; }
-    public Saldo SaldoAtual { get; private set; }
+    public Conta Conta { get; set; }
     
-    private List<Movimentacao> _movimentacoes;
-    public IReadOnlyCollection<Movimentacao> Movimentacoes => _movimentacoes;
+    private List<Dia> _Dias;
+    public IReadOnlyCollection<Dia> Dias => _Dias;
 
     private Extrato()
     {
-        _movimentacoes = new List<Movimentacao>();
+        _Dias = new List<Dia>();
     }
 
-    public Extrato(Saldo saldo, Saldo saldoAtual) : this()
+    public Extrato(Conta conta) : this()
     {
-        SaldoInicial = saldo;
-        SaldoAtual = saldoAtual;
+        Conta = conta;
     }
 
-    public void AdicionarMovimentacao(Movimentacao movimentacao)
+    public void IniciarNovoDia()
     {
-        _movimentacoes.Add(movimentacao);
+        _Dias.Add(new Dia(Conta.Saldo));
     }
 
-    public void RecalcularSaldo()
+    public void RecalcularSaldoDaConta(Saldo saldo)
     {
-        var movimentacoesDiaAtual = _movimentacoes
-            .Where(m => m.DataCadastro.Date == DateTime.Now.Date)
-            .ToList();
+        Conta.AtuatizarSaldo(saldo);
+    }
+}
 
-        if (!movimentacoesDiaAtual.Any()) return;
+public class Dia : Entity
+{
+    public Saldo SaldoInicial { get; set; }
+    
+    public Saldo SaldoFinal { get; set; }
 
-        var saldoAtualRecalculado = SaldoInicial.Moeda.Valor + movimentacoesDiaAtual.Sum(m => m.Moeda.Valor);
+    public Extrato Extrato { get; set; }
 
-        SaldoAtual = new Saldo(new Moeda(saldoAtualRecalculado));
+    private List<Movimentacao> _Movimentacoes;
+    public IReadOnlyCollection<Movimentacao> Movimentacoes => _Movimentacoes;
+
+    public Dia(Saldo saldoInicial)
+    {
+        SaldoInicial = saldoInicial;
+    }
+
+    public void RegistrarMovimentacao(Movimentacao movimentacao)
+    {
+        _Movimentacoes.Add(movimentacao);
+        RecalcularSaldoDia();
+    }
+
+    private void RecalcularSaldoDia()
+    {
+        var moeda = new Moeda(SaldoInicial.Moeda.Valor + _Movimentacoes.Sum(m => m.Moeda.Valor));
+        
+        SaldoFinal = new Saldo(moeda);
+        
+        Extrato.RecalcularSaldoDaConta(SaldoFinal);
     }
 }
